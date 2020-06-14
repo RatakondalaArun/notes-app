@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <div class="container">
-      <QuoteProgress :progress="totalQuotes"></QuoteProgress>
-      <QuoteInputField @onAddQuote="addQuote($event)"></QuoteInputField>
-      <QuoteGrid :quotes="quotes" @onRemoveCard="discardCard($event)"></QuoteGrid>
-      <div class="row" v-if="quotes.length>=10">
+      <h1>Todo List</h1>
+      <!-- <QuoteProgress :progress="totalQuotes"></QuoteProgress> -->
+      <CreateNote @onAddItem="addQuote($event)"></CreateNote>
+      <TodoGrid :list="list" @onRemoveCard="discardCard($event)"></TodoGrid>
+      <div class="row" v-if="list.length>=10">
         <div class="col-12">
           <div class="alert alert-danger" role="alert">You can only add 10 Quote😁</div>
         </div>
@@ -14,35 +15,35 @@
 </template>
 
 <script>
-import QuoteProgress from "./components/QuoteProgress";
-import QuoteInputField from "./components/QuoteInputField";
-import QuoteGrid from "./components/QuoteGrid";
+// import QuoteProgress from "./components/QuoteProgress";
+import CreateNote from "./components/CreateNote";
+import TodoGrid from "./components/TodoGrid";
 export default {
   name: "App",
   components: {
-    QuoteInputField,
-    QuoteGrid,
-    QuoteProgress
+    CreateNote,
+    TodoGrid
+    // QuoteProgress
   },
 
   data: function() {
     return {
-      quotes: []
+      list: []
     };
   },
   computed: {
     totalQuotes: function() {
-      return this.quotes.length;
+      return this.list.length;
     }
   },
   methods: {
     addQuote: function(data) {
-      if (this.quotes.length < 10) {
-        this.quotes.unshift(data);
+      if (this.list.length < 10) {
+        this.list.unshift(data);
       }
     },
     discardCard: function(index) {
-      this.quotes.splice(index, 1);
+      this.list.splice(index, 1);
     }
   }
 };

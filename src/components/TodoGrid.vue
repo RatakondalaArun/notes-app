@@ -1,8 +1,8 @@
 <template>
   <div class="row">
-    <div v-for="(quote, index) in quotes" :key="index" class="col-4">
+    <div v-for="(item, index) in list" :key="index" class="col-4">
       <div class="card quote-area" @click="removeCard(index)">
-        <div class="card-body" style="text-align:left;white-space:pre">{{ quote }}</div>
+        <div class="card-body" style="text-align:left;white-space:pre">{{ item }}</div>
       </div>
     </div>
   </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ["quotes"],
+  props: ["list"],
   data: function() {
     return {};
   },
